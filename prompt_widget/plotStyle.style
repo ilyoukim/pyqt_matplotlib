@@ -1,0 +1,95 @@
+# https://matplotlib.org/stable/users/explain/customizing.html
+# https://matplotlib.org/3.1.0/gallery/style_sheets/style_sheets_reference.html
+# PATH: ${PYTHON}/Lib/site-packages/matplotlib/mpl-data/stylelib
+
+## ***************************************************************************
+## * LINES                                                                   *
+## ***************************************************************************
+lines.linewidth: .8
+lines.antialiased: True
+
+
+## ***************************************************************************
+## * BOXPLOT                                                                 *
+## ***************************************************************************
+boxplot.showbox: False
+
+
+## ***************************************************************************
+## * FONT                                                                    *
+## ***************************************************************************
+font.size: 11
+font.family: serif
+
+
+## ***************************************************************************
+## * AXES                                                                    *
+## ***************************************************************************
+axes.titlesize: medium
+axes.edgecolor: 707070
+axes.labelsize: small
+axes.linewidth: 0.6
+axes.formatter.useoffset: False
+
+
+## ***************************************************************************
+## * TICKS                                                                   *
+## ***************************************************************************
+xtick.minor.visible : True
+xtick.labelsize: small
+ytick.labelsize: small
+xtick.color: 303030
+ytick.color: 303030
+
+
+## ***************************************************************************
+## * GRIDS                                                                   *
+## ***************************************************************************
+grid.color: 808080
+grid.linewidth: 0.4
+grid.linestyle: -.
+
+
+## ***************************************************************************
+## * LEGEND                                                                  *
+## ***************************************************************************
+#legend.facecolor: white
+#legend.frameon: True
+legend.framealpha: 0.
+#legend.edgecolor: 1
+
+#legend.numpoints: 1
+#legend.markerscale : 0.5
+legend.fontsize: small
+
+legend.labelspacing: 0.4
+legend.handlelength: 1.4
+legend.handletextpad : 0.5
+legend.borderaxespad: .2
+#legend.columnspacing: 2
+
+
+## ***************************************************************************
+## * FIGURE                                                                  *
+## ***************************************************************************
+figure.frameon: True
+figure.titlesize: large
+figure.subplot.hspace: 0.0
+
+
+## ***************************************************************************
+## * AGG RENDERING                                                           *
+## ***************************************************************************
+# chunk up large lines into smaller lines!
+# simple trick to avoid those pesky O(>n) algorithms!
+agg.path.chunksize: 10000
+
+
+## ***************************************************************************
+## * PATHS                                                                   *
+## ***************************************************************************
+# Maximally simplify lines.
+path.simplify: True
+path.simplify_threshold: 1.0
+
+

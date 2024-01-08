@@ -122,7 +122,7 @@ class MyForm(QtWidgets.QWidget):
         self.buf[-1] = self.count
 
         delta = float(self.buf[-1] - self.buf[0])
-        fps = max(delta, 0) / float(len(self.buf) - 1)
+        fps = max(delta, 0.) / (len(self.buf) - 1)
         self.ui.lb_fps.setText(f"{fps:.1f} Hz")
 
 

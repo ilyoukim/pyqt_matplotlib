@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\program\python\matplotlib\pyqt_matplot\main_widget.ui'
-#
 # Created by: PyQt5 UI code generator 5.15.9
 #
 # WARNING: Any manual changes made to this file will be lost when pyuic5 is
@@ -14,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(656, 493)
+        Form.resize(640, 480)
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setObjectName("verticalLayout")
         self.hbl_top = QtWidgets.QHBoxLayout()
@@ -89,6 +87,7 @@ class Ui_Form(object):
         self.lb_fps.setObjectName("lb_fps")
         self.horizontalLayout.addWidget(self.lb_fps)
         self.verticalLayout.addLayout(self.horizontalLayout)
+        self.verticalLayout.setStretch(2, 1)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -104,3 +103,13 @@ class Ui_Form(object):
         self.label_3.setText(_translate("Form", "Frame rate:"))
         self.lb_fps.setText(_translate("Form", "0.0 Hz"))
 from matplotWidget import MatplotWidget
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

@@ -18,6 +18,9 @@ class MyForm(QtWidgets.QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         
+        self.setMinimumSize(640, 480)
+        self.resize(800, 600)
+        
         self.ui.sb_refreshTime.wheelEvent = lambda event: None
         
         ## UI Style

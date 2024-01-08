@@ -10,11 +10,12 @@ from qtpy.QtCore import Slot, Signal
 
 from main_widget_ui import Ui_Form
 
+
 class MyForm(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super(MyForm, self).__init__(parent)
         
-        ## UI init
+        # UI init
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         
@@ -23,51 +24,51 @@ class MyForm(QtWidgets.QWidget):
         
         self.ui.sb_refreshTime.wheelEvent = lambda event: None
         
-        ## UI Style
+        # UI Style
         self.ui.hbl1.setSpacing(2)
         self.ui.chart1.setStyleSheet("background-color: #FFFFFF;")
         self.ui.chart2.setStyleSheet("background-color: #FFFFFF;")
         
-        ## add Chart toolbar with location
+        # add Chart toolbar with location
         self.ui.chart1.addToolBar()
         self.ui.chart2.addToolBar(0)
         
-        ## UI Default property
-        self.ui.btn_Stop.setEnabled(False)
+        # UI Default property
+        self.ui.btn_stop.setEnabled(False)
         
-        ## Plot timer
-        self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.on_btn_Plot_clicked)
+        # Plot timer
+        self.timer = QtCore.QTimer(self)
+        self.timer.timeout.connect(self.on_btn_plot_clicked)
         
-        ## Frame rate timer : buffer 5 second
+        # Frame rate timer : buffer 5 second
         self.buf = np.zeros(6)
         self.count = 0
-        self.timerfps = QtCore.QTimer()
-        self.timerfps.timeout.connect(self.updateFPS)
-        self.timerfps.start(1000)
+        self.timer_fps = QtCore.QTimer(self)
+        self.timer_fps.timeout.connect(self.update_fps)
+        self.timer_fps.start(1000)
     
     @Slot()
-    def on_btn_Play_clicked(self):
-        self.ui.btn_Stop.setEnabled(True)
-        self.ui.btn_Play.setEnabled(False)
-        self.ui.btn_Plot.setEnabled(False)
+    def on_btn_play_clicked(self):
+        self.ui.btn_stop.setEnabled(True)
+        self.ui.btn_play.setEnabled(False)
+        self.ui.btn_plot.setEnabled(False)
         self.ui.sb_refreshTime.setEnabled(False)
         
         if not self.timer.isActive():
-            refreshTime = self.ui.sb_refreshTime.value()
-            self.timer.start(int(refreshTime))
+            refresh_time = self.ui.sb_refreshTime.value()
+            self.timer.start(int(refresh_time))
     
     @Slot()
-    def on_btn_Stop_clicked(self):
+    def on_btn_stop_clicked(self):
         self.timer.stop()
         
-        self.ui.btn_Stop.setEnabled(False)
-        self.ui.btn_Play.setEnabled(True)
-        self.ui.btn_Plot.setEnabled(True)
+        self.ui.btn_stop.setEnabled(False)
+        self.ui.btn_play.setEnabled(True)
+        self.ui.btn_plot.setEnabled(True)
         self.ui.sb_refreshTime.setEnabled(True)
     
     @Slot()
-    def on_btn_Plot_clicked(self):
+    def on_btn_plot_clicked(self):
         n = 100
         
         x = np.linspace(1, n, n)
@@ -87,8 +88,8 @@ class MyForm(QtWidgets.QWidget):
         chart.ax.plot(x, y, 'C0')
         chart.ax.grid()
         
-        strTitle = datetime.now().strftime('%H:%M:%S.%f')[:-3]
-        chart.ax.set_title(strTitle)
+        str_title = datetime.now().strftime('%H:%M:%S.%f')[:-3]
+        chart.ax.set_title(str_title)
         
         chart.draw()
     
@@ -111,16 +112,17 @@ class MyForm(QtWidgets.QWidget):
         chart.ax.set_ylabel('left y-label')
         ax2.set_ylabel('right y-label')
         
-        strTitle = datetime.now().strftime('%H:%M:%S.%f')[:-3]
-        chart.ax.set_title(strTitle)
+        str_title = datetime.now().strftime('%H:%M:%S.%f')[:-3]
+        chart.ax.set_title(str_title)
         
         chart.draw()
     
-    def updateFPS(self):
+    def update_fps(self):
         self.buf = np.roll(self.buf, -1)
         self.buf[-1] = self.count
-        
-        fps = max(self.buf[-1] - self.buf[0], 0) / float(len(self.buf) - 1)
+
+        delta = float(self.buf[-1] - self.buf[0])
+        fps = max(delta, 0) / float(len(self.buf) - 1)
         self.ui.lb_fps.setText(f"{fps:.1f} Hz")
 
 
